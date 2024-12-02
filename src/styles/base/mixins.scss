@@ -1,0 +1,19 @@
+@mixin bp($point) {
+  @if $point ==mini {
+    @media screen and (max-width: 992px) {
+      @content;
+    }
+  } @else if $point ==tab {
+    @media screen and (max-width: 768px) {
+      @content;
+    }
+  } @else if $point ==mob {
+    @media screen and (max-width: 576px) {
+      @content;
+    }
+  } @else {
+    @media screen and (max-width: $point) {
+      @content;
+    }
+  }
+}

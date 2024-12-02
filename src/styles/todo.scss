@@ -1,0 +1,187 @@
+@use "./base/variable.scss" as *;
+@use "./base/mixins.scss" as *;
+@use "./base/base.scss" as *;
+@use "sass:color";
+// Global styles
+body {
+  font-family: "Poppins", sans-serif;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  min-height: 100vh;
+  max-height: 100vh;
+  margin: 0;
+  padding: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.app {
+  background: white;
+  border-radius: 20px;
+  box-shadow: $shadow;
+  padding: 2rem;
+  width: 100%;
+  max-width: 700px;
+
+  @include bp(tab) {
+    padding: 1.5rem;
+    width: 95%;
+  }
+
+  h1 {
+    color: $text-color;
+    text-align: center;
+    font-size: 2.5rem;
+    margin-bottom: 2rem;
+    font-weight: 600;
+  }
+
+  h2 {
+    color: $text-color;
+    font-size: 1.8rem;
+    margin-bottom: 1.5rem;
+  }
+}
+
+// Todo Form
+.todo-form {
+  display: flex;
+  gap: 1rem;
+  margin-bottom: 2rem;
+
+  @include bp(tab) {
+    flex-direction: column;
+  }
+
+  input {
+    flex: 1;
+    padding: 1rem;
+    border: 2px solid $secondary-color;
+    border-radius: 10px;
+    font-size: 1rem;
+    transition: $transition;
+
+    &:focus {
+      outline: none;
+      border-color: $primary-color;
+      box-shadow: 0 0 0 3px rgba($primary-color, 0.2);
+    }
+  }
+
+  button {
+    padding: 1rem 2rem;
+    background-color: $primary-color;
+    color: white;
+    border: none;
+    border-radius: 10px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: $transition;
+
+    @include bp(tab) {
+      width: 100%;
+    }
+
+    &:hover {
+      transform: translateY(-2px);
+      box-shadow: $shadow;
+    }
+  }
+}
+
+// Todo List
+.todo-list {
+  max-height: 255px;
+  overflow-y: scroll;
+
+  .todos__single {
+    background: white;
+    border-radius: 12px;
+    padding: 1rem;
+    margin-bottom: 1rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+    transition: $transition;
+
+    @include bp(tab) {
+      padding: 12px;
+      gap: 15px;
+    }
+
+    &:hover {
+      transform: translateY(-2px);
+      box-shadow: $shadow;
+    }
+
+    &.completed {
+      background: $secondary-color;
+
+      .todos__single--text {
+        text-decoration: line-through;
+        color: #888;
+      }
+    }
+
+    .todos__single--text {
+      flex: 1;
+      font-size: 1.1rem;
+      color: $text-color;
+      padding: 0.5rem;
+      border: none;
+      background: transparent;
+
+      padding: 0;
+      overflow: hidden;
+      position: relative;
+      text-overflow: ellipsis;
+      max-width: 140px;
+
+      &:focus {
+        outline: none;
+      }
+    }
+
+    .icon {
+      padding: 0.5rem;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: $transition;
+      font-size: 1.2rem;
+      color: $text-color;
+
+      @include bp(tab) {
+        padding: 0;
+      }
+
+      &:hover {
+        background: $secondary-color;
+      }
+    }
+
+    button.icon {
+      background: $success-color;
+      color: white;
+      border: none;
+      padding: 0.5rem 1rem;
+      font-size: 1rem;
+
+      &:hover {
+        background: color.scale($success-color, $lightness: -10%);
+      }
+    }
+  }
+}
+
+// Icons styling
+.icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 0.3rem;
+
+  &:hover {
+    transform: scale(1.1);
+  }
+}
